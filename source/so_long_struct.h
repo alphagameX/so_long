@@ -3,10 +3,11 @@
 #define SO_LONG_STRUCT
 
 #define to , &
-#define HEIGHT 600
+#define HEIGHT 800
 #define WIDTH 800
 #define STEP 1
 #define CHUNCK_SIZE 25
+#define STEP_TIME 50
 
 typedef struct	s_data {
 	void	*img;
@@ -31,9 +32,20 @@ typedef struct s_texture {
 typedef struct s_player {
 	int x;
 	int y;
-
-	int step_x;
-	int step_y;
+	int spawn_x;
+	int spawn_y;
+	int jumping;
+	int falling;
+	int previous_y;
+	int moving;
+	int inertie;
+	int dir;
+	int delay;
+	int step;
+	int inertie_time;
+	int step_time;
+	int scrolling;
+	int chunk_cursor;
 	t_texture *textures;
 }				t_player;
 
@@ -41,7 +53,7 @@ typedef struct s_chunk {
 	int size;
 	int cursor;
 	int step;
-	int dir;
+	int count;
 }				t_chunk;
 
 typedef struct s_map {
@@ -55,11 +67,20 @@ typedef struct s_input {
 	int count;
 }				t_input;
 
+typedef struct s_coord {
+	int y;
+	int x;
+	int type;
+}	t_coord;
+
 typedef struct s_game {
 	t_map map;
 	t_data image;
 	t_texture *textures;
 	t_input input;
+
+	t_coord ***blocks;
+
 
 	int old_time;
 	int time;

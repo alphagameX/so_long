@@ -37,10 +37,8 @@ t_player get_spawn(t_sarray array)
         {
             if(array.buffer[y][x] == 'C')
             {
-                player.x = x;
-                player.y = y;
-                player.step_x = 0;
-                player.step_y = 0;
+                player.spawn_x = x;
+                player.spawn_y = y;
                 return player;
             }
             y++;

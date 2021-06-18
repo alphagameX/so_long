@@ -9,9 +9,10 @@ int main (void) {
 
     game = init_game();
 
-
     register_hook(&game);
 
     mlx_loop(game.mlx);
+
+    return (0);
 
 }

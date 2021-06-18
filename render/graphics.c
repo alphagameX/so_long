@@ -3,6 +3,8 @@
 
 int rendering(t_game *game)
 {
+
+
     game->time += 1;
 
     foreach_input(game->input, game, key_press);
@@ -17,6 +19,16 @@ int rendering(t_game *game)
 
 
 	mlx_put_image_to_window(game->mlx, game->window, game->image.img, 0, 0);
+
+
+    // print_blocks(*game);
+
+
+   
+	// exit(1);
+ 
+    game->map.player.inertie_time = game->time / game->map.player.delay;
+    game->map.player.step_time = game->time / STEP_TIME;
 
     return (1);
 

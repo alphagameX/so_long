@@ -45,6 +45,8 @@ void register_hook(t_game *game);
 int close_window(int key, t_game *game);
 int player_move(int key, t_game *game);
 int key_press(t_game *game, int key);
+int unregister_key(int key, t_game *game);
+int hit(t_game *game, t_player player);
 
 /*
 ** RENDERING
@@ -71,5 +73,6 @@ void print_input(t_input input);
 void add_input(t_input *input, int key);
 void remove_input(t_input *input, int key);
 void foreach_input(t_input input, t_game *game, int (*f)(t_game *, int));
+
 
 #endif

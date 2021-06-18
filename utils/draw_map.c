@@ -24,20 +24,20 @@ int move_chunk_right(t_game *game)
 	int size_of_all_block;
     int block;
 
-    block = WIDTH / game->map.chunk.size;
-    size_of_all_block = block * game->map.chunk.size;
-	if(game->map.chunk.cursor <= ((ft_strlen(game->map.buffer.buffer[0]) - 1) - game->map.chunk.size) - 1)
+    block = WIDTH / CHUNCK_SIZE;
+    size_of_all_block = block * CHUNCK_SIZE;
+	if(game->map.chunk.cursor <= ((ft_strlen(game->map.buffer.buffer[0]) - 1) - CHUNCK_SIZE) - 1)
 	{
 		game->map.chunk.step += STEP;
 		if(game->map.chunk.step >= block - (WIDTH - size_of_all_block))
 		{
 			game->map.chunk.cursor++;
 			game->map.chunk.step = 0;
+			return (1);
 		}
-
-
-		game->map.chunk.dir = 1;     
 	}
+
+	return (0);
 }
 
 
@@ -51,17 +51,18 @@ int move_chunk_left(t_game *game)
 		if(game->map.chunk.step == 0 && game->map.chunk.cursor > 1)
 		{          
 			game->map.chunk.cursor--;
-			game->map.chunk.step = (WIDTH / game->map.chunk.size);
+			game->map.chunk.step = (WIDTH / CHUNCK_SIZE);
+			return (1);
 		}
-
-		game->map.chunk.dir = 0;
 	}
+
+	return (0);
 }
 
 
 
 
-void draw_block(t_game *game, int x, int y, int width, int height, int type)
+void draw_block(t_game *game, int x, int y, int width, int height, int type, char c)
 {
 	int xi;
 	int yi;
@@ -74,13 +75,13 @@ void draw_block(t_game *game, int x, int y, int width, int height, int type)
 		yi = 0;
 		while(yi < height)
 		{
-			if(x / (WIDTH / game->map.chunk.size) == 0 )
+			if(x / (WIDTH / CHUNCK_SIZE) == 0 )
 			{
 				if((drawX - xi) >= 0 && (drawX - xi) <= WIDTH && (y + yi) >= 0 && (y + yi) <= HEIGHT)
 				{
 					if (type != -1)
 					{
-						color = get_color(&game->textures[type].img.addr, game->textures[type].width , yi / 2, ((WIDTH / game->map.chunk.size) - xi) / 2);
+						color = get_color(&game->textures[type].img.addr, game->textures[type].width , yi / 2, ((WIDTH / CHUNCK_SIZE) - xi) / 2);
 						pixel_put(&game->image, drawX - xi , y + yi, *(unsigned int *)color);
 					}
 					else
@@ -117,63 +118,68 @@ void draw_last_block(t_game *game, int x, int block)
 	int y;
 	int block_type;
 
-	if(block * game->map.chunk.size == WIDTH)
+	y = 0;
+	while(y < game->map.buffer.count)
+	{
+		if(game->map.buffer.buffer[(game->map.buffer.count - 1) - y][(game->map.chunk.cursor + (x / block)) + 1] == '1')
 		{
-			if(x / block == game->map.chunk.size - 1 && game->map.chunk.step > 0)
-			{
-				y = 0;
-				while(y < game->map.buffer.count)
-				{
-					if(game->map.buffer.buffer[(game->map.buffer.count - 1) - y][(game->map.chunk.cursor + (x / block)) + 1] == '1')
-					{
-						block_type = get_block_type(game->map, (game->map.chunk.cursor + (x / block)) + 1, (game->map.buffer.count - 1) - y);
-						draw_block(game, (x + block) - game->map.chunk.step, HEIGHT - (block * (y + 1)), game->map.chunk.step, block, block_type);
-					}
-					else
-						draw_block(game, (x + block) - game->map.chunk.step, HEIGHT - (block * (y + 1)), game->map.chunk.step, block, -1);
-
-					y += 1;
-				}
-			}
+			block_type = get_block_type(game->map, (game->map.chunk.cursor + (x / block)) + 1, (game->map.buffer.count - 1) - y);
+			draw_block(game, (x + block) - game->map.chunk.step, HEIGHT - (block * (y + 1)), game->map.chunk.step, block, block_type, 'c');
 		}
+		else
+			draw_block(game, (x + block) - game->map.chunk.step, HEIGHT - (block * (y + 1)), game->map.chunk.step, block, -1, 'c');
+		y += 1;
+	}
+		
 
 }
 
 
 int draw_map(t_game *game)
 {
-	int block = WIDTH / game->map.chunk.size;
+	int block = WIDTH / CHUNCK_SIZE;
 	int x = 0;
 	int y;
 	int block_type;
-
-
+	char c;
 
 	while(x < WIDTH)
 	{
 		y = 0; 
 		while(y < game->map.buffer.count)
 		{
-			if( game->map.buffer.buffer[(game->map.buffer.count - 1) - y][game->map.chunk.cursor + (x / block)] == '1')
+			c = game->map.buffer.buffer[(game->map.buffer.count - 1) - y][game->map.chunk.cursor + (x / block)];
+			if(c == '1')
 			{
 
 				block_type = get_block_type(game->map, game->map.chunk.cursor + (x / block) ,(game->map.buffer.count - 1) - y );
 
 				if(x / block == 0) {
-					draw_block(game, x, HEIGHT - (block * (y + 1)) , block - game->map.chunk.step, block, block_type);
+					draw_block(game, x, HEIGHT - (block * (y + 1)) , block - game->map.chunk.step, block, block_type, c);
 				}
 				else
-					draw_block(game, x - game->map.chunk.step, HEIGHT - (block * (y + 1)) , block, block, block_type);
+					draw_block(game, x - game->map.chunk.step, HEIGHT - (block * (y + 1)) , block, block, block_type, c);
 			
 			} else {
-				draw_block(game, x - game->map.chunk.step, HEIGHT - (block * (y + 1)) , block, block, -1);
+				draw_block(game, x - game->map.chunk.step, HEIGHT - (block * (y + 1)) , block, block, -1, c);
 			}
+
+
+
 			y++;
 		}
 
-		draw_last_block(game, x, block);
+		if(block * CHUNCK_SIZE == WIDTH)
+		{
+			if(x / block == CHUNCK_SIZE - 1 && game->map.chunk.step > 0)
+			{
+				draw_last_block(game, x, block);
+			}
+		}
+
 		
 		x += block;
 	}
+
 	return (1);
 }
