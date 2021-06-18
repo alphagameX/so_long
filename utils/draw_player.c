@@ -30,12 +30,12 @@ void draw_player_at(t_game *game, int x, int y)
     int type;
 
     xi = 0;
+    type = get_sprite(game);
     while(xi < (WIDTH / CHUNCK_SIZE))
     {
         yi = 0;
         while(yi < (WIDTH / CHUNCK_SIZE))
         {
-            type = get_sprite(game);
             color = get_color(&game->map.player.textures[type].img.addr, game->map.player.textures[type].width, yi / 2, xi / 2);
             if(*(unsigned int*)color != 0)
             {

@@ -7,7 +7,7 @@ t_texture *load_texture(t_game *game, char **paths, int count)
     int i;
 
     i = 0;
-    textures = malloc(sizeof(t_texture) * count + 1);
+    textures = malloc(sizeof(t_texture) * (count + 1));
     if(!textures)
         exit(2);
     while(i < count)
@@ -22,6 +22,49 @@ t_texture *load_texture(t_game *game, char **paths, int count)
     return textures;
 }
 
+t_player init_player(t_game *game)
+{
+    t_player player;
+    static char *sprites[5] = {
+        "sprites/xpm/player_1.xpm",
+        "sprites/xpm/player_jump.xpm",
+        "sprites/xpm/player_step_1.xpm",
+        "sprites/xpm/player_step_2.xpm",
+        "sprites/xpm/player_step_3.xpm"
+    };
+
+    game->map.buffer = parse_map("map.ber");
+    player = get_spawn(game->map.buffer);
+    checking_map(&game->map.buffer, game);
+    interpret_map(&game->map.buffer, game);
+    player.x = (WIDTH / CHUNCK_SIZE) * (player.spawn_x - 1);
+    player.y = (HEIGHT - ((WIDTH / CHUNCK_SIZE) * (game->map.buffer.count - player.spawn_y))) - 1;
+    player.jumping = 0;
+    player.falling = 0;
+    player.previous_y = player.y;
+    player.dir = 0;
+    player.delay = 1;
+    player.step = 0;
+    player.chunk_cursor = 0;
+    player.textures = load_texture(game, sprites, 5);
+
+    return (player);
+}
+
+void *mlx_setup(t_game *game)
+{
+    void *mlx;
+    mlx = mlx_init();
+
+    game->window = mlx_new_window(mlx, WIDTH, HEIGHT, "So long");
+    game->image.img = mlx_new_image(mlx, WIDTH, HEIGHT);
+    game->image.addr = mlx_get_data_addr(game->image.img, &game->image.bits_per_pixel, &game->image.line_length, &game->image.endian);
+    mlx_put_image_to_window(mlx, game->window, game->image.img, 0, 0);
+
+    mlx_do_key_autorepeatoff(mlx);
+
+    return (mlx);
+}
 
 t_game init_game()
 {
@@ -31,47 +74,20 @@ t_game init_game()
         "sprites/xpm/floor.xpm",
         "sprites/xpm/stairs.xpm"
     };
-    static char *sprites[5] = {
-        "sprites/xpm/player_1.xpm",
-        "sprites/xpm/player_jump.xpm",
-        "sprites/xpm/player_step_1.xpm",
-        "sprites/xpm/player_step_2.xpm",
-        "sprites/xpm/player_step_3.xpm"
-    };
 
-    new.mlx = mlx_init();
+    new.mlx = mlx_setup(&new);
+    new.textures = NULL;
+    new.map.player.textures = NULL;
 
-    mlx_do_key_autorepeatoff(new.mlx);
-
-    new.map.buffer = parse_map("map.ber");
-    new.map.player = get_spawn(new.map.buffer);
-
+    new.map.player = init_player(&new);
     new.map.chunk.cursor = 1;
     new.map.chunk.size = CHUNCK_SIZE;
     new.map.chunk.step = 0;
     new.map.chunk.count = 0;
     new.input.count = 0;
     new.input.list = NULL;
-
-    new.map.player.x = (WIDTH / CHUNCK_SIZE) * (new.map.player.spawn_x - 1);
-    new.map.player.y = (HEIGHT - ((WIDTH / CHUNCK_SIZE) * (new.map.buffer.count - new.map.player.spawn_y))) - 1;
-    new.map.player.jumping = 0;
-    new.map.player.falling = 0;
-    new.map.player.previous_y = new.map.player.y;
-    new.map.player.dir = 0;
-    new.map.player.delay = 1;
-    new.map.player.step = 0;
-    new.map.player.chunk_cursor = 0;
-
-    // new.blocks = create_blocks(new);
-
-    new.window = mlx_new_window(new.mlx, WIDTH, HEIGHT, "So long");
-    new.image.img = mlx_new_image(new.mlx, WIDTH, HEIGHT);
-    new.image.addr = mlx_get_data_addr(new.image.img, &new.image.bits_per_pixel, &new.image.line_length, &new.image.endian);
-    mlx_put_image_to_window(new.mlx, new.window, new.image.img, 0, 0);
-
+   
     new.textures = load_texture(&new, textures, 3);
-    new.map.player.textures = load_texture(&new, sprites, 5);
 
 
     return (new);

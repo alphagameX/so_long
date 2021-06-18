@@ -10,24 +10,26 @@ int key_press(t_game *game, int key)
 
 int stop_hook(t_game *game, int key)
 {
-    if(key == 32 || key == 65362) {
+    if(key == UP) {
         game->map.player.falling = 1;
         game->map.player.jumping = 0;
         // game->map.player.moving = 0;
         // game->map.player.delay = 1;
     }
 
-    if(key == 65361 || key == 65363)
+    if(key == LEFT || key == RIGHT)
     {
         game->map.player.moving = 0;
         game->map.player.inertie = (WIDTH / CHUNCK_SIZE) / 2;
         game->map.player.delay = 1;
     }
+
+    return (0);
 }
 
 int register_key(int key, t_game *game)
 {
-    // printf("press: %d\n", key);
+    printf("press: %d\n", key);
     
     if(!search_input(game->input, key))
         add_input(&game->input, key);
@@ -37,7 +39,7 @@ int register_key(int key, t_game *game)
 
 int unregister_key(int key, t_game *game)
 {
-    // printf("release: %d\n", key);
+    printf("release: %d\n", key);
 
     if(search_input(game->input, key))
     {

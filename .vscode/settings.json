@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "so_long.h": "c",
-        "libft.h": "c",
-        "mlx.h": "c"
-    },
-    "lldb.showDisassembly": "auto",
-    "lldb.dereferencePointers": true
-}

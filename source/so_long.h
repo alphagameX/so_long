@@ -1,5 +1,4 @@
 #include "../libft/libft.h"
-#include "../mlx/mlx.h"
 #include "so_long_struct.h"
 #include "stdio.h"
 #include <fcntl.h>
@@ -27,6 +26,7 @@ int move_chunk_left(t_game *game);
 t_sarray new_sarray();
 void push_sarray(char *new_line, t_sarray *array);
 void print_sarray(t_sarray array);
+void free_sarray(t_sarray *array);
 
 /*
 ** PARSING
@@ -35,6 +35,8 @@ void print_sarray(t_sarray array);
 
 t_sarray parse_map(char *path);
 t_player get_spawn(t_sarray buffer);
+void checking_map(t_sarray *array, t_game *game);
+void interpret_map(t_sarray *array, t_game *game);
 
 /*
 ** HOOK EVENT
@@ -73,6 +75,13 @@ void print_input(t_input input);
 void add_input(t_input *input, int key);
 void remove_input(t_input *input, int key);
 void foreach_input(t_input input, t_game *game, int (*f)(t_game *, int));
+
+/*
+** EXIT
+**
+*/
+
+void exit_game(t_game *game);
 
 
 #endif

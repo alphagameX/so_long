@@ -3,10 +3,10 @@
 
 int close_window(int key, t_game *game)
 {
-    if(key == 65307)
+    if(key == ECHAP)
     {
         mlx_do_key_autorepeaton(game->mlx);
-        exit(0);
+        exit_game(game);
     }
     return (1);
 }
@@ -21,8 +21,8 @@ int hit(t_game *game, t_player player)
     if(game->map.chunk.step > 0)
         player.x += game->map.chunk.step;
 
-    x0 = (((player.x + 1) / (WIDTH / CHUNCK_SIZE)) + 1);
-    x1 = (((player.x + ((WIDTH / CHUNCK_SIZE) - 1)) / (WIDTH / CHUNCK_SIZE)) + 1);
+    x0 = (((player.x + STEP) / (WIDTH / CHUNCK_SIZE)) + 1);
+    x1 = (((player.x + ((WIDTH / CHUNCK_SIZE) - STEP)) / (WIDTH / CHUNCK_SIZE)) + 1);
     y0 = (player.y / (HEIGHT / CHUNCK_SIZE));
     y1 = (player.y + (HEIGHT / CHUNCK_SIZE)) / (HEIGHT / CHUNCK_SIZE);
 
@@ -41,10 +41,10 @@ int hit(t_game *game, t_player player)
     
     {
         if((game->map.buffer.buffer[y0][x1] == '1' && game->map.buffer.buffer[y1][x1] == '0') ||
-            game->map.buffer.buffer[y0][x0] == '1' &&   game->map.buffer.buffer[y1][x0] == '0')
+            (game->map.buffer.buffer[y0][x0] == '1' && game->map.buffer.buffer[y1][x0] == '0'))
         {
 
-            if(game->map.buffer.buffer[(player.y + 1) / (HEIGHT / CHUNCK_SIZE)][x1] == '1' || game->map.buffer.buffer[(player.y + 1) / (HEIGHT / CHUNCK_SIZE)][x0] == '1')
+            if(game->map.buffer.buffer[(player.y + STEP) / (HEIGHT / CHUNCK_SIZE)][x1] == '1' || game->map.buffer.buffer[(player.y + STEP) / (HEIGHT / CHUNCK_SIZE)][x0] == '1')
                 return (1);
 
             return (0);
@@ -63,7 +63,7 @@ int player_move(int key, t_game *game)
 
     t_player *player = &game->map.player;
 
-    if(key == 65361)
+    if(key == LEFT)
     {
         if(player->x >= 0)
         {
@@ -76,7 +76,7 @@ int player_move(int key, t_game *game)
             }
         }
     }
-    if(key == 65363)
+    if(key == RIGHT)
     {
        
         player->moving = 1;
@@ -103,7 +103,7 @@ int player_move(int key, t_game *game)
         }
         
     }
-    if(key == 32 || key == 65362)
+    if(key == UP)
     {
         if(player->falling == 0)
         {
@@ -122,7 +122,7 @@ int player_move(int key, t_game *game)
             }
         }
     }
-    if(key == 65364)
+    if(key == DOWN)
     {
         player->y += STEP;
 

@@ -4,7 +4,6 @@
 int rendering(t_game *game)
 {
 
-
     game->time += 1;
 
     foreach_input(game->input, game, key_press);

@@ -48,6 +48,21 @@ void print_sarray(t_sarray array)
         ft_putchar('\n');
         i++;
     }
+}
 
-   
+/*
+* free sarray
+* 
+*/
+void free_sarray(t_sarray *array)
+{
+    int y;
+    
+    y = 0;
+    while(y < array->count)
+    {
+        free(array->buffer[y]);
+        y++;
+    }
+    array = NULL;
 }

@@ -5,9 +5,30 @@
 #define to , &
 #define HEIGHT 800
 #define WIDTH 800
-#define STEP 1
+#define STEP 3
 #define CHUNCK_SIZE 25
 #define STEP_TIME 50
+
+#if OS == 1
+#include "../mlx_linux/mlx.h"
+
+#define UP 65362
+#define DOWN 65364
+#define LEFT 65361
+#define RIGHT 65363
+#define ECHAP 65307
+
+#else
+#include "../mlx_osx/mlx.h"
+
+#define UP 126
+#define DOWN 125
+#define LEFT 123
+#define RIGHT 124
+#define ECHAP 53
+
+#endif
+
 
 typedef struct	s_data {
 	void	*img;
