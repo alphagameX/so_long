@@ -6,9 +6,11 @@ void foreach_input(t_input input, t_game *game, int (*f)(t_game *, int))
     int i;
 
     i = 0;
+
     while(i < input.count)
     {
-        f(game, input.list[i]);
+        if(input.list != NULL)
+            f(game, input.list[i]);
         i++;
     }
 }
@@ -72,6 +74,8 @@ void remove_input(t_input *input, int key)
     free(input->list);
     input->count--;
     input->list = new;
+    if(input->count == 0)
+        free(new);
 }
 
 void print_input(t_input input)
@@ -81,9 +85,9 @@ void print_input(t_input input)
     i = 0;
     while(i < input.count)
     {
-        printf("%d\n", input.list[i]);
+        ft_printf("%d\n", input.list[i]);
         i++;
     }
 
-    printf("input list: %d\n", input.count);
+    ft_printf("input list: %d\n", input.count);
 }

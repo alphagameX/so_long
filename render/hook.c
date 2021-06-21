@@ -2,7 +2,6 @@
 
 int key_press(t_game *game, int key)
 {
-    // print_input(game->input);
     close_window(key, game);
     player_move(key, game);
     return (1);
@@ -13,8 +12,6 @@ int stop_hook(t_game *game, int key)
     if(key == UP) {
         game->map.player.falling = 1;
         game->map.player.jumping = 0;
-        // game->map.player.moving = 0;
-        // game->map.player.delay = 1;
     }
 
     if(key == LEFT || key == RIGHT)
@@ -29,24 +26,18 @@ int stop_hook(t_game *game, int key)
 
 int register_key(int key, t_game *game)
 {
-    printf("press: %d\n", key);
-    
     if(!search_input(game->input, key))
         add_input(&game->input, key);
-
     return (1);
 }
 
 int unregister_key(int key, t_game *game)
 {
-    printf("release: %d\n", key);
-
     if(search_input(game->input, key))
     {
         stop_hook(game, key);
         remove_input(&game->input, key);
-    }
-        
+    } 
     return (1);
 }
 

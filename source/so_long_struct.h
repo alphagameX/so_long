@@ -5,9 +5,9 @@
 #define to , &
 #define HEIGHT 800
 #define WIDTH 800
-#define STEP 3
+#define STEP 1
 #define CHUNCK_SIZE 25
-#define STEP_TIME 50
+#define STEP_TIME 100
 
 #if OS == 1
 #include "../mlx_linux/mlx.h"
@@ -67,6 +67,15 @@ typedef struct s_player {
 	int step_time;
 	int scrolling;
 	int chunk_cursor;
+	int die;
+	int die_time;
+	int frame_to_die;
+	int life;
+	int coin;
+	int finished;
+	int level;
+	int move;
+	int previous_move;
 	t_texture *textures;
 }				t_player;
 
@@ -81,6 +90,9 @@ typedef struct s_map {
 	t_sarray buffer;
 	t_player player;
 	t_chunk chunk;
+
+	int coin;
+	int levels;
 } 				t_map;
 
 typedef struct s_input {
@@ -99,9 +111,6 @@ typedef struct s_game {
 	t_data image;
 	t_texture *textures;
 	t_input input;
-
-	t_coord ***blocks;
-
 
 	int old_time;
 	int time;

@@ -25,10 +25,13 @@ void push_sarray(char *new_line, t_sarray *array)
     new = malloc(sizeof(char *) * (array->count + 1));
     while(i < array->count)
     {
-        new[i] = array->buffer[i];
+        new[i] = ft_strdup(array->buffer[i]);
+        free(array->buffer[i]);
         i++;
     }
     new[i] = new_line;
+    if(array->buffer)
+        free(array->buffer);
     array->buffer = new;
     array->count++;
 }
@@ -64,5 +67,6 @@ void free_sarray(t_sarray *array)
         free(array->buffer[y]);
         y++;
     }
+    free(array->buffer);
     array = NULL;
 }

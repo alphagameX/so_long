@@ -1,9 +1,14 @@
 
 FILE = $(wildcard *.c) \
-	   $(wildcard utils/*.c) \
-	   $(wildcard render/*.c)
+	   $(wildcard function/*.c) \
+	   $(wildcard function/map/*.c) \
+	   $(wildcard function/player/*.c) \
+	   $(wildcard function/hud/*.c) \
+	   $(wildcard function/init/*.c) \
+	   $(wildcard function/parse/*.c) \
+	   $(wildcard render/*.c) 
 
-CC = gcc
+CC = gcc -Wall -Werror -Wextra
 
 OS=$(shell uname)
 
@@ -18,4 +23,4 @@ endif
 LIBFT = -L./libft -lft
 
 all: 
-	$(CC) $(FILE) $(MLX) $(LIBFT) -D OS=$(OS) $(KEY) 
+	$(CC) $(FILE) $(MLX) $(LIBFT) -D OS=$(OS) $(KEY) -g

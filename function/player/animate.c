@@ -1,71 +1,41 @@
-#include "../source/so_long.h"
+#include "../../source/so_long.h"
 
-
-int get_sprite(t_game *game)
+void action_on_finish(t_player *player, t_game *game)
 {
-    int type;
-
-    if(game->map.player.jumping == 1)
-        type = 1;
+    if(player->coin != game->map.coin)
+    {
+        player->life--;
+        if(player->life < 0)
+            exit_game(game);
+        reset_game(game);
+        return;
+    }
+    if(player->level < game->map.levels)
+    {
+        player->level += 1;
+        reset_game(game);
+        return;
+    }
     else
-        type = 0;
-
-    if(game->map.player.moving == 1 && game->map.player.jumping == 0 && game->map.player.falling == 0)
-    {
-        if(game->map.player.step == 0)
-            type = 2;
-        else if(game->map.player.step == 1)
-            type = 3;
-        else if(game->map.player.step == 2)
-            type = 4;
-    }
-    return (type);
+        exit_game(game);
 }
-
-void draw_player_at(t_game *game, int x, int y)
-{
-    int xi;
-    int yi;
-    char *color;
-    int type;
-
-    xi = 0;
-    type = get_sprite(game);
-    while(xi < (WIDTH / CHUNCK_SIZE))
-    {
-        yi = 0;
-        while(yi < (WIDTH / CHUNCK_SIZE))
-        {
-            color = get_color(&game->map.player.textures[type].img.addr, game->map.player.textures[type].width, yi / 2, xi / 2);
-            if(*(unsigned int*)color != 0)
-            {
-                if(x + xi >= 0 && x + xi <= WIDTH && y + yi >= 0 && y + yi <= WIDTH)
-                    pixel_put(&game->image, x + xi, y + yi, *(unsigned int*)color);
-            }
-
-            yi++;
-        }
-        xi++;
-    }
-}
-
 
 void always_on_ground(t_game *game)
 {
     t_player *player;
 
     player = &game->map.player;
-
     if(!hit(game, *player) && player->jumping == 0)
     {
         player->falling = 1;
         player->y += STEP;
-
         if(hit(game, *player))
         {
             player->y -= STEP;
             player->falling = 0;
             player->previous_y = player->y;
+            if(player->finished == 1)
+               action_on_finish(player, game);
         }
     }
 }
@@ -116,28 +86,29 @@ void apply_inertie(t_game *game)
     }
 }
 
-int draw_player(t_game *game)
+
+void die(t_game *game)
 {
-
-    t_player player;
-
-    player = game->map.player;
-
-  
-    always_on_ground(game);
-    apply_inertie(game);
-    
-  
-    if(game->time / STEP_TIME != game->map.player.step_time)
+    if(game->map.player.die == 1)
     {
-        game->map.player.step++;
-        if(game->map.player.step > 2)
-            game->map.player.step = 0;
+        game->map.player.step = 3;
+
+        if(game->time / 2 != game->map.player.die_time && game->map.player.frame_to_die > 0)
+        {
+            if(game->map.player.frame_to_die <= 60)
+                game->map.player.y++;
+            else
+                game->map.player.y--;
+
+            game->map.player.frame_to_die--;
+        } else if (game->map.player.frame_to_die == 0){
+            if(game->map.player.life > 0)
+            {
+                reset_game(game);
+                game->map.player.life -= 1;
+            } else {
+                exit_game(game);
+            }
+        }
     }
-
-    // printf("%d\n", player.y);
-
-    draw_player_at(game, player.x, player.y);
-
-    return (1);
 }

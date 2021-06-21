@@ -5,6 +5,7 @@ int rendering(t_game *game)
 {
 
     game->time += 1;
+    game->map.player.previous_move = game->map.player.move;
 
     foreach_input(game->input, game, key_press);
 
@@ -16,11 +17,9 @@ int rendering(t_game *game)
     draw_map(game);
     draw_player(game);
 
-
 	mlx_put_image_to_window(game->mlx, game->window, game->image.img, 0, 0);
 
-
-    // print_blocks(*game);
+    draw_hud(game);
 
 
    
@@ -28,6 +27,8 @@ int rendering(t_game *game)
  
     game->map.player.inertie_time = game->time / game->map.player.delay;
     game->map.player.step_time = game->time / STEP_TIME;
+    game->map.player.die_time = game->time / 2;
+
 
     return (1);
 
