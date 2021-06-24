@@ -49,9 +49,9 @@ mlx_clean:
 endif
 
 all:
-	make libft_all
+	@cd libft && make re
 	make mlx_all
-	$(CC) $(FILE) $(MLX) $(LIBFT) -D OS=$(OS) $(KEY) -o $(NAME) -D STEP=1
+	$(CC) $(LIBFT) $(FILE) $(MLX) -D OS=$(OS) $(KEY) -o $(NAME) -D STEP=1
 
 fclean: clean libft_clean mlx_clean
 	rm -rf $(NAME)
