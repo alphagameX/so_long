@@ -48,7 +48,9 @@ mlx_clean:
 	@echo "mlx clean"
 endif
 
-all: libft_all mlx_all
+all:
+	make libft_all
+	make mlx_all
 	$(CC) $(FILE) $(MLX) $(LIBFT) -D OS=$(OS) $(KEY) -o $(NAME) -D STEP=1
 
 fclean: clean libft_clean mlx_clean
@@ -58,4 +60,6 @@ re: fclean libft_all mlx_all all
 
 bonus: re
 
+# .PHONY: all
+.DEFAULT_GOAL:= all
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arthurtinseau <arthurtinseau@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 13:46:56 by arthur            #+#    #+#             */
-/*   Updated: 2021/06/24 16:11:48 by arthur           ###   ########.fr       */
+/*   Updated: 2021/06/24 16:19:05 by arthurtinse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ int	unregister_key(int key, t_game *game)
 
 void	register_hook(t_game *game)
 {
-	if (OS == 1)
+	if (OS == 0)
 		mlx_hook(game->window, 17, 1L << 5, exit_game, game);
-	else if (OS == 0)
+	else if (OS == 1)
 		mlx_hook(game->window, 33, 1L << 17, exit_game, game);
 	mlx_hook(game->window, 02, (1L << 0), register_key, game);
 	mlx_hook(game->window, 03, (1L << 1), unregister_key, game);
