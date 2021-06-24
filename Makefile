@@ -49,7 +49,7 @@ mlx_clean:
 endif
 
 all: libft_all mlx_all
-	$(CC) $(FILE) $(MLX) $(LIBFT) -D OS=$(OS) $(KEY) -o $(NAME) -D STEP=3
+	$(CC) $(FILE) $(MLX) $(LIBFT) -D OS=$(OS) $(KEY) -o $(NAME) -D STEP=1
 
 fclean: clean libft_clean mlx_clean
 	rm -rf $(NAME)
@@ -58,5 +58,4 @@ re: fclean libft_all mlx_all all
 
 bonus: re
 
-.DEFAULT: all
 

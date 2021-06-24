@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   exit_linux.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 13:33:49 by arthur            #+#    #+#             */
-/*   Updated: 2021/06/24 13:38:23 by arthur           ###   ########.fr       */
+/*   Updated: 2021/06/24 16:13:41 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	free_textures_player(t_game *game)
 	}
 }
 
-void	exit_game(t_game *game)
+int	exit_game(t_game *game)
 {
 	free_textures_map(game);
 	free_textures_player(game);
@@ -74,4 +74,5 @@ void	exit_game(t_game *game)
 		free(game->mlx);
 	}
 	exit(0);
+	return (0);
 }

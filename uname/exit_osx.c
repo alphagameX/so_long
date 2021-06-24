@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_osx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthurtinseau <arthurtinseau@student.42    +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 13:33:49 by arthur            #+#    #+#             */
-/*   Updated: 2021/06/24 15:33:47 by arthurtinse      ###   ########.fr       */
+/*   Updated: 2021/06/24 16:13:35 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	free_textures_player(t_game *game)
 	}
 }
 
-void	exit_game(t_game *game)
+int 	exit_game(t_game *game)
 {
 	free_textures_map(game);
 	free_textures_player(game);
@@ -70,4 +70,5 @@ void	exit_game(t_game *game)
 	if (game->mlx)
 		free(game->mlx);
 	exit(0);
+	return (0);
 }

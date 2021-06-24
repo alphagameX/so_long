@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 15:05:46 by arthur            #+#    #+#             */
-/*   Updated: 2021/06/24 15:05:47 by arthur           ###   ########.fr       */
+/*   Updated: 2021/06/24 16:12:43 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void foreach_input(t_input input, t_game *game, int (*f)(t_game *, int));
  **
  */
 
-void exit_game(t_game *game);
+int exit_game(t_game *game);
 void reset_game(t_game *game);
 
 
