@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arthurtinseau <arthurtinseau@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 15:05:46 by arthur            #+#    #+#             */
-/*   Updated: 2021/06/24 16:45:23 by arthur           ###   ########.fr       */
+/*   Updated: 2021/06/24 17:10:18 by arthurtinse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
@@ -22,37 +23,37 @@
  **
  */
 
-void    pixel_put(t_data *data, int x, int y, int color);
-int     draw_map(t_game *game);
-char    *get_color(char **addr, int width, int x, int y);
-int     draw_player(t_game *game);
-int     move_chunk_right(t_game *game);
-int     move_chunk_left(t_game *game);
-void    draw_hud(t_game *game);
-void    ddraw_first_block(t_game *game, t_draw_block i);
-void    draw_block(t_game *game, t_draw_block i);
-void    draw_last_block(t_game *game, int x, int block);
-int     get_block_type(t_map map, int x, int y);
+void		pixel_put(t_data *data, int x, int y, int color);
+int			draw_map(t_game *game);
+char		*get_color(char **addr, int width, int x, int y);
+int			draw_player(t_game *game);
+int			move_chunk_right(t_game *game);
+int			move_chunk_left(t_game *game);
+void		draw_hud(t_game *game);
+void		ddraw_first_block(t_game *game, t_draw_block i);
+void		draw_block(t_game *game, t_draw_block i);
+void		draw_last_block(t_game *game, int x, int block);
+int			get_block_type(t_map map, int x, int y);
 
 /*
  ** SARRAY
  **
  */
 
-t_sarray new_sarray();
-void push_sarray(char *new_line, t_sarray *array);
-void print_sarray(t_sarray array);
-void free_sarray(t_sarray *array);
+t_sarray	new_sarray(void);
+void		push_sarray(char *new_line, t_sarray *array);
+void		print_sarray(t_sarray array);
+void		free_sarray(t_sarray *array);
 
 /*
  ** PARSING
  **
  **/
 
-t_sarray parse_map(t_game *game);
-t_player get_spawn(t_sarray buffer);
-void checking_map(t_sarray *array, t_game *game);
-void interpret_map(t_sarray *array, t_game *game);
+t_sarray	parse_map(t_game *game);
+t_player	get_spawn(t_sarray buffer);
+void 		checking_map(t_sarray *array, t_game *game);
+void 		interpret_map(t_sarray *array, t_game *game);
 
 /*
  ** HOOK EVENT
