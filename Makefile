@@ -51,11 +51,10 @@ clean:
 	@cd libft && make clean
 
 fclean: clean
-	@cd libft && make fclean
 	@rm -rf $(NAME)
 
 re: fclean
-	@cd libft && make re
+	@cd libft && make all
 	@make all
 
 
