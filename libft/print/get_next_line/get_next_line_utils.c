@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atinseau <atinseau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 14:54:42 by atinseau          #+#    #+#             */
-/*   Updated: 2020/11/30 18:44:08 by atinseau         ###   ########.fr       */
+/*   Updated: 2021/06/24 14:17:17 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ char	*ft_gnl_strjoin(char *s1, char *s2)
 
 	if (!s1 && !s2)
 		return (NULL);
-	if (!(new = (char *)malloc(sizeof(char) *
-			(ft_gnl_strlen(s1) + ft_gnl_strlen(s2)) + 1)))
+	new = (char *)malloc(sizeof(char) * (ft_gnl_strlen(s1)
+				+ ft_gnl_strlen(s2)) + 1);
+	if (!new)
 		return (NULL);
 	e = 0;
 	i = 0;
@@ -35,9 +36,9 @@ char	*ft_gnl_strjoin(char *s1, char *s2)
 	return (new);
 }
 
-int		ft_gnl_strlen(char *str)
+int	ft_gnl_strlen(char *str)
 {
-	int i;
+	int	i;
 
 	if (!str)
 		return (0);

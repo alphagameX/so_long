@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atinseau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 00:05:18 by atinseau          #+#    #+#             */
-/*   Updated: 2020/11/20 12:55:24 by atinseau         ###   ########.fr       */
+/*   Updated: 2021/06/24 14:50:57 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-static int		nb_str(char *s, char sep)
+static int	nb_str(char *s, char sep)
 {
 	int	i;
 	int	e;
@@ -28,7 +28,7 @@ static int		nb_str(char *s, char sep)
 	return (i);
 }
 
-static int		get_len(char *str, char sep)
+static int	get_len(char *str, char sep)
 {
 	int	i;
 
@@ -42,7 +42,7 @@ static int		get_len(char *str, char sep)
 	return (i);
 }
 
-static char		**fill_sup_str(char **sup_str, char *str, char sep, int nb)
+static char	**fill_sup_str(char **sup_str, char *str, char sep, int nb)
 {
 	int		e;
 	int		current_len;
@@ -54,7 +54,8 @@ static char		**fill_sup_str(char **sup_str, char *str, char sep, int nb)
 		while (*str == sep)
 			str++;
 		current_len = get_len(str, sep);
-		if (!(sup_str[e] = (char *)malloc(sizeof(char) * (current_len + 1))))
+		sup_str[e] = (char *)malloc(sizeof(char) * (current_len + 1));
+		if (!sup_str[e])
 			return (NULL);
 		y = 0;
 		while (y < current_len)
@@ -65,7 +66,7 @@ static char		**fill_sup_str(char **sup_str, char *str, char sep, int nb)
 	return (sup_str);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**sup_str;
 	int		nb;
@@ -73,7 +74,8 @@ char			**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	nb = nb_str((char *)s, c);
-	if (!(sup_str = (char **)malloc(sizeof(char *) * (nb + 1))))
+	sup_str = (char **)malloc(sizeof(char *) * (nb + 1));
+	if (!sup_str)
 		return (NULL);
 	sup_str = fill_sup_str(sup_str, (char *)s, c, nb);
 	return (sup_str);

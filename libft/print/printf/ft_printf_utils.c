@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atinseau <atinseau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 13:59:58 by atinseau          #+#    #+#             */
-/*   Updated: 2020/12/13 13:59:59 by atinseau         ###   ########.fr       */
+/*   Updated: 2021/06/24 14:20:07 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft.h"
 
-static int		len(long long n)
+static int	len(long long n)
 {
 	int		i;
 
@@ -30,18 +30,19 @@ static int		len(long long n)
 	return (i);
 }
 
-char			*ft_malloc_zero(void)
+char	*ft_malloc_zero(void)
 {
 	char	*str;
 
-	if (!(str = (char *)malloc(sizeof(char) * 2)))
+	str = (char *)malloc(sizeof(char) * 2);
+	if (!str)
 		return (NULL);
 	str[0] = '0';
 	str[1] = '\0';
 	return (str);
 }
 
-char			*ft_itoa_max(long long n)
+char	*ft_itoa_max(long long n)
 {
 	char		*str;
 	int			i;
@@ -51,7 +52,8 @@ char			*ft_itoa_max(long long n)
 		return (ft_malloc_zero());
 	nb = n;
 	i = len(n);
-	if (!(str = (char *)malloc(sizeof(char) * (i + 1))))
+	str = (char *)malloc(sizeof(char) * (i + 1));
+	if (!str)
 		return (NULL);
 	str[i--] = '\0';
 	if (nb < 0)
@@ -68,9 +70,9 @@ char			*ft_itoa_max(long long n)
 	return (str);
 }
 
-int				ft_putstr_r(char *str)
+int	ft_putstr_r(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])

@@ -12,7 +12,7 @@
 
 #include "../../libft.h"
 
-int		ft_parsing(va_list *args, char *s)
+int	ft_parsing(va_list *args, char *s)
 {
 	int			i;
 	int			count;
@@ -38,7 +38,7 @@ int		ft_parsing(va_list *args, char *s)
 	return (count);
 }
 
-int		to_plus(t_options *p, int nbr)
+int	to_plus(t_options *p, int nbr)
 {
 	if (nbr < 0)
 	{
@@ -59,7 +59,7 @@ void	setter_point(char *str, t_options *p, int *main, va_list *args)
 
 void	ft_get_flag(char *str, t_options *print, int *main_loop, va_list *args)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])

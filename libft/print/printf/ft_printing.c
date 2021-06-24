@@ -27,7 +27,7 @@ static int	ft_print_padd_char(char type, int padd_size, int field_size, char c)
 	return (count);
 }
 
-void		ft_print_flag(t_options print, va_list *args, int *count)
+void	ft_print_flag(t_options print, va_list *args, int *count)
 {
 	if (print.type == 'd' || print.type == 'i')
 		*count += ft_print_number(print, va_arg(*args, int));
@@ -43,9 +43,9 @@ void		ft_print_flag(t_options print, va_list *args, int *count)
 		*count += ft_print_addr(print, va_arg(*args, unsigned long));
 }
 
-int			ft_print_char(t_options print, char c)
+int	ft_print_char(t_options print, char c)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	if (!print.reverse_padd)

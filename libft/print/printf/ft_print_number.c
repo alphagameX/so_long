@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_number.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atinseau <atinseau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 13:59:52 by atinseau          #+#    #+#             */
-/*   Updated: 2020/12/13 13:59:53 by atinseau         ###   ########.fr       */
+/*   Updated: 2021/06/24 14:42:18 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft.h"
 
-int			ft_print_padd(int end, char c)
+int	ft_print_padd(int end, char c)
 {
 	int	i;
 
@@ -31,14 +31,16 @@ static int	ft_check_padd(t_options p, char *str, int *sign)
 
 	(void)str;
 	temp_sign = *sign;
-	if (*sign == -1 && p.padd_char == '0' &&
-			p.padd_size != 0 && p.reverse_padd == 0)
+	if (*sign == -1 && p.padd_char == '0'
+		&& p.padd_size != 0 && p.reverse_padd == 0)
 	{
 		ft_putchar('-');
 		*sign *= -1;
 	}
-	return (ft_print_padd(p.padd_size - p.field_size -
-			((temp_sign == -1) ? 1 : 0), p.padd_char));
+	if (temp_sign == -1)
+		return (ft_print_padd(p.padd_size - p.field_size - 1, p.padd_char));
+	else
+		return (ft_print_padd(p.padd_size - p.field_size - 0, p.padd_char));
 }
 
 static char	*ft_check_type(char type, long long nbr)
@@ -55,7 +57,7 @@ static void	setter_minus(char **str, int *count, int *sign)
 	*sign *= -1;
 }
 
-int			ft_print_number(t_options print, long long nbr)
+int	ft_print_number(t_options print, long long nbr)
 {
 	char	*nb;
 	int		sign;

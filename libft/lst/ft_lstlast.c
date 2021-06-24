@@ -14,7 +14,7 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	t_list *s;
+	t_list	*s;
 
 	s = lst;
 	while (s != NULL)

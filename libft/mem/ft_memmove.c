@@ -12,7 +12,7 @@
 
 #include "../libft.h"
 
-static void		fill_right(unsigned char *dest, unsigned char *src, size_t n)
+static void	fill_right(unsigned char *dest, unsigned char *src, size_t n)
 {
 	while (0 < n)
 	{
@@ -21,7 +21,7 @@ static void		fill_right(unsigned char *dest, unsigned char *src, size_t n)
 	}
 }
 
-void			*ft_memmove(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	unsigned char	i;
 	unsigned char	*d;

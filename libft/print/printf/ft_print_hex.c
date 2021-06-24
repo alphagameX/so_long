@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_hex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atinseau <atinseau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 13:59:48 by atinseau          #+#    #+#             */
-/*   Updated: 2020/12/13 15:18:22 by atinseau         ###   ########.fr       */
+/*   Updated: 2021/06/24 14:19:08 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft.h"
 
-static char		*revert_hex(char *str, int len)
+static char	*revert_hex(char *str, int len)
 {
 	char	*buf;
 	int		i;
 
-	if (!(buf = (char *)malloc(sizeof(char) * len + 1)))
+	buf = (char *)malloc(sizeof(char) * len + 1);
+	if (!buf)
 		return (ft_malloc_zero());
 	i = 0;
 	while (len >= 0)
@@ -26,7 +27,7 @@ static char		*revert_hex(char *str, int len)
 	return (buf);
 }
 
-char			*ft_get_hex(char type, unsigned long nb)
+char	*ft_get_hex(char type, unsigned long nb)
 {
 	char	*base;
 	char	buf[100];
@@ -49,7 +50,7 @@ char			*ft_get_hex(char type, unsigned long nb)
 	return (revert_hex(buf, pos - 1));
 }
 
-int				ft_addr_zero(t_options p)
+int	ft_addr_zero(t_options p)
 {
 	int	count;
 
@@ -62,9 +63,9 @@ int				ft_addr_zero(t_options p)
 	return (count + 2);
 }
 
-int				ft_print_padd_hex(t_options p, char *addr)
+int	ft_print_padd_hex(t_options p, char *addr)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	ft_putstr("0x");
@@ -73,7 +74,7 @@ int				ft_print_padd_hex(t_options p, char *addr)
 	return (count + 2);
 }
 
-int				ft_print_addr(t_options p, unsigned long nbr)
+int	ft_print_addr(t_options p, unsigned long nbr)
 {
 	char	*addr;
 	int		count;

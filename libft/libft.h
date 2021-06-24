@@ -20,7 +20,7 @@
 # include <limits.h>
 # include "print/get_next_line/get_next_line.h"
 
-typedef struct		s_list
+typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
@@ -34,7 +34,7 @@ void				ft_lstdelone(t_list *lst, void (*del)(void*));
 void				ft_lstclear(t_list **lst, void(*del)(void*));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst,
-void				*(*f)(void *), void (*del)(void *));
+						void *(*f)(void *), void (*del)(void *));
 void				ft_putchar(char c);
 void				ft_putstr(char *str);
 int					ft_strlen(char *str);
@@ -54,7 +54,7 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
 char				*ft_strnstr(const char *big,
-				const char *little, size_t len);
+						const char *little, size_t len);
 void				*ft_memset(void *s, int c, size_t n);
 void				ft_bzero(void *s, size_t n);
 void				*ft_calloc(size_t nmemb, size_t size);
@@ -75,7 +75,7 @@ void				ft_putendl_fd(char *s, int fd);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void				ft_argv_strjoin(char **dst, int count, ...);
 void				ft_unleak_strjoin(char **dst, char *src);
-typedef struct		s_options
+typedef struct s_options
 {
 	int				reverse_padd;
 	int				get_sign;
@@ -88,10 +88,10 @@ int					ft_printf(const char *str, ...);
 int					ft_parsing(va_list *args, char *s);
 void				ft_init(t_options *print);
 void				ft_get_flag(char *str, t_options *print,
-int					*main_loop, va_list *args);
+						int *main_loop, va_list *args);
 int					is_type(char t);
 void				digit_getter(char *str, int *size,
-int					*main_loop, va_list *args);
+						int *main_loop, va_list *args);
 void				ft_print_flag(t_options print, va_list *args, int *count);
 int					ft_print_str(t_options print, char *str);
 int					ft_print_number(t_options print, long long nbr);

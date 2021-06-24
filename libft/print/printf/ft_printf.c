@@ -12,7 +12,7 @@
 
 #include "../../libft.h"
 
-int		ft_printf(const char *str, ...)
+int	ft_printf(const char *str, ...)
 {
 	va_list	list;
 
@@ -29,17 +29,10 @@ void	ft_init(t_options *print)
 	print->padd_char = ' ';
 }
 
-int		is_type(char t)
+int	is_type(char t)
 {
-	if (t == 'd' ||
-			t == 'p' ||
-			t == 'u' ||
-			t == 'x' ||
-			t == '%' ||
-			t == 'i' ||
-			t == 's' ||
-			t == 'c' ||
-			t == 'X')
+	if (t == 'd' || t == 'p' || t == 'u' || t == 'x' || t == '%'
+		|| t == 'i' || t == 's' || t == 'c' || t == 'X')
 		return (1);
 	return (0);
 }

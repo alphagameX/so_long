@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atinseau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 23:54:54 by atinseau          #+#    #+#             */
-/*   Updated: 2020/11/20 12:23:15 by atinseau         ###   ########.fr       */
+/*   Updated: 2021/06/24 13:54:36 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-static int		len(long n)
+static int	len(long n)
 {
 	int		i;
 
@@ -30,7 +30,7 @@ static int		len(long n)
 	return (i);
 }
 
-char			*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	char	*str;
 	int		i;
@@ -40,7 +40,8 @@ char			*ft_itoa(int n)
 		return (ft_malloc_zero());
 	nb = n;
 	i = len(n);
-	if (!(str = (char *)malloc(sizeof(char) * (i + 1))))
+	str = (char *)malloc(sizeof(char) * (i + 1));
+	if (!str)
 		return (NULL);
 	str[i--] = '\0';
 	if (nb < 0)

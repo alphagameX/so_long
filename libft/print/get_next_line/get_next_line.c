@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atinseau <atinseau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 21:34:38 by atinseau          #+#    #+#             */
-/*   Updated: 2020/11/30 18:43:48 by atinseau         ###   ########.fr       */
+/*   Updated: 2021/06/24 14:11:43 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		has_return(char *str)
+int	has_return(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str)
@@ -34,7 +34,8 @@ char	*gnl_substr(char **str, int start, int len, int is_free)
 	int		i;
 
 	i = 0;
-	if (!(new = malloc(sizeof(char) * (len + 1))))
+	new = malloc(sizeof(char) * (len + 1));
+	if (!new)
 		return (NULL);
 	if (*str == NULL)
 	{
@@ -53,17 +54,19 @@ char	*gnl_substr(char **str, int start, int len, int is_free)
 	return (new);
 }
 
-int		get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
-	int				ret;
-	static char		*str;
-	char			*temp;
+	int			ret;
+	static char	*str;
+	char		*temp;
 
-	if (fd < 0 || !line || BUFFER_SIZE <= 0 ||
-			!(temp = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1))))
+	temp = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (fd < 0 || !line || BUFFER_SIZE <= 0 || !temp)
 		return (-1);
-	while (has_return(str) == 0 && (ret = read(fd, temp, BUFFER_SIZE)))
+	ret = 1;
+	while (has_return(str) == 0 && ret)
 	{
+		ret = read(fd, temp, BUFFER_SIZE);
 		if (ret == -1)
 		{
 			free(temp);
@@ -80,7 +83,7 @@ int		get_next_line(int fd, char **line)
 	return (1);
 }
 
-int		last_line(char **line, char **str)
+int	last_line(char **line, char **str)
 {
 	*line = gnl_substr(str, 0, ft_gnl_strlen(*str), 0);
 	if (*str)
@@ -91,7 +94,7 @@ int		last_line(char **line, char **str)
 	return (0);
 }
 
-int		pos_n(char *str)
+int	pos_n(char *str)
 {
 	int	i;
 

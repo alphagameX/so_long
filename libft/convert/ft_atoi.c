@@ -6,21 +6,21 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 22:39:33 by arthur            #+#    #+#             */
-/*   Updated: 2020/11/20 12:20:54 by atinseau         ###   ########.fr       */
+/*   Updated: 2021/06/24 13:53:53 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int		is_whitespace(char c)
+int	is_whitespace(char c)
 {
-	if (c == '\n' || c == '\t' || c == '\f' || c == '\r' ||
-		c == '\v' || c == ' ')
+	if (c == '\n' || c == '\t' || c == '\f' || c == '\r'
+		|| c == '\v' || c == ' ')
 		return (1);
 	return (0);
 }
 
-int		ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	int				i;
 	int				sign;

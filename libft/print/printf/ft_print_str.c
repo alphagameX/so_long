@@ -41,7 +41,7 @@ static int	ft_check_padd(t_options p, char *str)
 
 static int	padd_zero(t_options p, int main, char *str)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	if (p.field_size < 0)
@@ -54,7 +54,7 @@ static int	padd_zero(t_options p, int main, char *str)
 	return (count);
 }
 
-int			ft_print_str(t_options print, char *str)
+int	ft_print_str(t_options print, char *str)
 {
 	int	i;
 	int	count;

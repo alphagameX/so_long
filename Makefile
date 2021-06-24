@@ -1,4 +1,6 @@
 
+NAME=so_long
+
 FILE = $(wildcard *.c) \
 	   $(wildcard function/*.c) \
 	   $(wildcard function/map/*.c) \
@@ -23,4 +25,18 @@ endif
 LIBFT = -L./libft -lft
 
 all: 
-	$(CC) $(FILE) $(MLX) $(LIBFT) -D OS=$(OS) $(KEY) -g
+	$(CC) $(FILE) $(MLX) $(LIBFT) -D OS=$(OS) $(KEY) -g -o $(NAME)
+
+
+clean:
+	cd libft && make clean
+	ifeq ($(OS), Darwin)
+		cd mlx_osx && make clean
+	else
+		cd mlx_linux && make clean
+
+fclean: clean
+	rm -rf $(NAME)
+
+re: fclean all
+

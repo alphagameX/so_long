@@ -14,7 +14,7 @@
 
 void	ft_unleak_strjoin(char **dst, char *src)
 {
-	char *tmp;
+	char	*tmp;
 
 	if (!*dst)
 	{
