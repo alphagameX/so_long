@@ -6,25 +6,30 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 13:33:49 by arthur            #+#    #+#             */
-/*   Updated: 2021/06/24 19:13:51 by arthur           ###   ########.fr       */
+/*   Updated: 2021/06/24 19:25:35 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../source/so_long.h"
 
-void reset_game(t_game *game)
+void	reset_game(t_game *game)
 {
+	t_player	player;
+
 	free_sarray(&game->map.buffer);
 	game->map.buffer = parse_map(game);
 	checking_map(&game->map.buffer, game);
 	interpret_map(&game->map.buffer, game);
+	player = get_spawn(game->map.buffer);
+	game->map.player.spawn_x = player.spawn_x;
+	game->map.player.spawn_y = player.spawn_y;
 	set_player_conf(game, &game->map.player);
 	set_chunk_conf(&game->map.chunk);
 }
 
-void free_textures_map(t_game *game)
+void	free_textures_map(t_game *game)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (game->textures)
@@ -39,9 +44,9 @@ void free_textures_map(t_game *game)
 	}
 }
 
-void free_textures_player(t_game *game)
+void	free_textures_player(t_game *game)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (game->map.player.textures)
@@ -56,7 +61,7 @@ void free_textures_player(t_game *game)
 	}
 }
 
-int exit_game(t_game *game)
+int	exit_game(t_game *game)
 {
 	free_textures_map(game);
 	free_textures_player(game);
