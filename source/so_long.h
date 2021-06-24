@@ -11,11 +11,10 @@
 /* ************************************************************************** */
 
 #ifndef	SO_LONG_H
-# define SO_LONG_H
+#define SO_LONG_H
 # include "../libft/libft.h"
 # include "so_long_struct.h"
 # include "so_long_norm_struct.h"
-# include "stdio.h"
 # include <fcntl.h>
 
 
