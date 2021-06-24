@@ -17,30 +17,44 @@ OS=$(shell uname)
 ifeq ($(OS), Darwin)
 	MLX= -L./mlx_osx -lmlx -framework OpenGL -framework AppKit
 	OS=0
+	FILE += uname/exit_osx.c
 else
 	MLX= -L./mlx_linux -lmlx -L/usr/lib -lXext -lX11 -I/usr/include -lm -lz  -O3 
 	OS=1
+	FILE += uname/exit_linux.c
 endif
 
 LIBFT = -L./libft -lft
 
-all: 
-	$(CC) $(FILE) $(MLX) $(LIBFT) -D OS=$(OS) $(KEY) -g -o $(NAME)
-
 libft_clean:
 	@cd libft && make clean
+libft_all:
+	@cd libft && make all
 
 ifeq ($(OS), Darwin)
 clean: libft_clean
 	@cd mlx_osx && make clean
+mlx_all:
+	@cd mlx_osx && make
+	@echo "mlx ready"
+mlx_clean:
+	@cd mlx_osx && make clean
+	@echo "mlx clean"
 else
 clean: libft_clean	
+mlx_all:
+	@echo "mlx ready"
+mlx_clean:
+	@echo "mlx clean"
 endif
 
-fclean: clean
+all: libft_all mlx_all
+	$(CC) $(FILE) $(MLX) $(LIBFT) -D OS=$(OS) $(KEY) -o $(NAME) -D STEP=3
+
+fclean: clean libft_clean mlx_clean
 	rm -rf $(NAME)
 
-re: fclean all
+re: fclean libft_all mlx_all all
 
 bonus: re
 

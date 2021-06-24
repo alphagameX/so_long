@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_struct.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arthurtinseau <arthurtinseau@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 15:05:49 by arthur            #+#    #+#             */
-/*   Updated: 2021/06/24 15:05:50 by arthur           ###   ########.fr       */
+/*   Updated: 2021/06/24 16:03:20 by arthurtinse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #define to , &
 #define HEIGHT 800
 #define WIDTH 800
-#define STEP 1
 #define CHUNCK_SIZE 25
 #define STEP_TIME 100
 
