@@ -19,6 +19,10 @@ int draw_player(t_game *game);
 int move_chunk_right(t_game *game);
 int move_chunk_left(t_game *game);
 void draw_hud(t_game *game);
+void draw_first_block(t_game *game, t_draw_block i);
+void draw_block(t_game *game, t_draw_block i);
+void draw_last_block(t_game *game, int x, int block);
+int get_block_type(t_map map, int x, int y);
 
 /*
 ** SARRAY
@@ -64,6 +68,15 @@ int hit(t_game *game, t_player player);
 int player_move(int key, t_game *game);
 
 /*
+** DIR
+**
+*/
+
+void right(t_player *player, t_game *game);
+void left(t_player *player, t_game *game);
+void up(t_player *player, t_game *game);
+
+/*
 ** RENDERING
 **
 */
@@ -102,12 +115,7 @@ void foreach_input(t_input input, t_game *game, int (*f)(t_game *, int));
 void exit_game(t_game *game);
 void reset_game(t_game *game);
 
-/*
-** NORM
-**
-*/
 
-t_checking_map init_checking_map();
 
 
 #endif

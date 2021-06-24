@@ -33,7 +33,7 @@ void *mlx_setup(t_game *game)
 t_game init_game()
 {
     t_game new;
-    static char *textures[13] = {
+    static char *textures[14] = {
         "sprites/xpm/floor.xpm",
         "sprites/xpm/block.xpm",
         "sprites/xpm/stairs.xpm",
@@ -46,7 +46,8 @@ t_game init_game()
         "sprites/xpm/pipe_top_left.xpm",
         "sprites/xpm/pipe_top_right.xpm",
         "sprites/xpm/pipe_middle_left.xpm",
-        "sprites/xpm/pipe_middle_right.xpm"
+        "sprites/xpm/pipe_middle_right.xpm",
+        "sprites/xpm/enemy_1.xpm"
     };
     static char *sprites[6] = {
         "sprites/xpm/player_1.xpm",
@@ -61,7 +62,7 @@ t_game init_game()
 
     new.mlx = mlx_setup(&new);
     new.map.player.textures = load_texture(&new, sprites, 6);
-    new.textures = load_texture(&new, textures, 13);
+    new.textures = load_texture(&new, textures, 14);
 
     return (new);
 }
