@@ -1,16 +1,28 @@
-#include "../libft/libft.h"
-#include "so_long_struct.h"
-#include "so_long_norm_struct.h"
-#include "stdio.h"
-#include <fcntl.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/24 15:05:46 by arthur            #+#    #+#             */
+/*   Updated: 2021/06/24 15:05:47 by arthur           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef SO_LONG
-# define SO_LONG
+#ifndef	SO_LONG_H
+# define SO_LONG_H
+# include "../libft/libft.h"
+# include "so_long_struct.h"
+# include "so_long_norm_struct.h"
+# include "stdio.h"
+# include <fcntl.h>
+
 
 /*
-** DRAW
-**
-*/
+ ** DRAW
+ **
+ */
 
 void pixel_put(t_data *data, int x, int y, int color);
 int draw_map(t_game *game);
@@ -25,9 +37,9 @@ void draw_last_block(t_game *game, int x, int block);
 int get_block_type(t_map map, int x, int y);
 
 /*
-** SARRAY
-**
-*/
+ ** SARRAY
+ **
+ */
 
 t_sarray new_sarray();
 void push_sarray(char *new_line, t_sarray *array);
@@ -35,9 +47,9 @@ void print_sarray(t_sarray array);
 void free_sarray(t_sarray *array);
 
 /*
-** PARSING
-**
-**/
+ ** PARSING
+ **
+ **/
 
 t_sarray parse_map(t_game *game);
 t_player get_spawn(t_sarray buffer);
@@ -45,9 +57,9 @@ void checking_map(t_sarray *array, t_game *game);
 void interpret_map(t_sarray *array, t_game *game);
 
 /*
-** HOOK EVENT
-**
-*/
+ ** HOOK EVENT
+ **
+ */
 
 void register_hook(t_game *game);
 int close_window(int key, t_game *game);
@@ -56,9 +68,9 @@ int unregister_key(int key, t_game *game);
 
 
 /*
-** PLAYER
-**
-*/
+ ** PLAYER
+ **
+ */
 
 void apply_inertie(t_game *game);
 void die(t_game *game);
@@ -68,25 +80,25 @@ int hit(t_game *game, t_player player);
 int player_move(int key, t_game *game);
 
 /*
-** DIR
-**
-*/
+ ** DIR
+ **
+ */
 
 void right(t_player *player, t_game *game);
 void left(t_player *player, t_game *game);
 void up(t_player *player, t_game *game);
 
 /*
-** RENDERING
-**
-*/
+ ** RENDERING
+ **
+ */
 
 int rendering(t_game *game);
 
 /*
-** INIT
-**
-*/
+ ** INIT
+ **
+ */
 
 t_game init_game();
 t_player init_player(t_game *game);
@@ -97,9 +109,9 @@ void how_many_level(t_game *game);
 t_texture *load_texture(t_game *game, char **paths, int count);
 
 /*
-** INPUT
-**
-*/
+ ** INPUT
+ **
+ */
 
 int search_input(t_input input, int key);
 void print_input(t_input input);
@@ -108,9 +120,9 @@ void remove_input(t_input *input, int key);
 void foreach_input(t_input input, t_game *game, int (*f)(t_game *, int));
 
 /*
-** EXIT
-**
-*/
+ ** EXIT
+ **
+ */
 
 void exit_game(t_game *game);
 void reset_game(t_game *game);

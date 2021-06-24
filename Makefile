@@ -27,13 +27,15 @@ LIBFT = -L./libft -lft
 all: 
 	$(CC) $(FILE) $(MLX) $(LIBFT) -D OS=$(OS) $(KEY) -g -o $(NAME)
 
+libft_clean:
+	@cd libft && make clean
 
-clean:
-	cd libft && make clean
-	ifeq ($(OS), Darwin)
-		cd mlx_osx && make clean
-	else
-		cd mlx_linux && make clean
+ifeq ($(OS), Darwin)
+clean: libft_clean
+	@cd mlx_osx && make clean
+else
+clean: libft_clean	
+endif
 
 fclean: clean
 	rm -rf $(NAME)
