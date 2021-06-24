@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 11:37:19 by arthur            #+#    #+#             */
-/*   Updated: 2021/06/24 11:41:27 by arthur           ###   ########.fr       */
+/*   Updated: 2021/06/24 17:26:08 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_sarray	parse_map(t_game *game)
 	while (ret)
 	{
 		ret = get_next_line(fd, &line);
-		push_sarray(line to array);
+		push_sarray(line, &array);
 	}
 	free(path);
 	return (array);
