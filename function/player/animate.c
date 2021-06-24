@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 23:08:28 by arthur            #+#    #+#             */
-/*   Updated: 2021/06/24 10:38:46 by arthur           ###   ########.fr       */
+/*   Updated: 2021/06/24 17:55:23 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	apply_inertie(t_game *game)
 		{
 			if (player->dir == 1)
 				inertie_on_right(game, player);
-			else if (player->dir == -1)
+			else if (player->dir == -1 && player->x > 0)
 			{
 				player->x -= STEP;
 				if (hit(game, *player))
@@ -108,10 +108,10 @@ void	die(t_game *game)
 	if (game->map.player.die == 1)
 	{
 		game->map.player.step = 3;
-		if (game->time / 2 != game->map.player.die_time
+		if (game->time / DIE_DELAY != game->map.player.die_time
 			&& game->map.player.frame_to_die > 0)
 		{
-			if (game->map.player.frame_to_die <= 60)
+			if (game->map.player.frame_to_die <= FRAME_TO_DIE / 2)
 				game->map.player.y++;
 			else
 				game->map.player.y--;

@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 13:25:12 by arthur            #+#    #+#             */
-/*   Updated: 2021/06/24 13:25:13 by arthur           ###   ########.fr       */
+/*   Updated: 2021/06/24 18:36:37 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@ void	conf(t_game *game)
 	game->map.player.textures = NULL;
 	game->map.player.level = 1;
 	game->map.levels = 0;
+	game->map.buffer.buffer = NULL;
+	game->map.buffer.count = 0;
 	game->time = 0;
+	game->input.count = 0;
+	game->input.list = NULL;
 	how_many_level(game);
 	set_chunk_conf(&game->map.chunk);
 	game->map.player = init_player(game);
-	game->input.count = 0;
-	game->input.list = NULL;
 }
 
 void	set_player_conf(t_game *game, t_player *player)
@@ -42,7 +44,7 @@ void	set_player_conf(t_game *game, t_player *player)
 	player->moving = 0;
 	player->step = 0;
 	player->die = 0;
-	player->frame_to_die = 120;
+	player->frame_to_die = FRAME_TO_DIE;
 	player->chunk_cursor = 0;
 	player->step_time = 0;
 	player->coin = 0;

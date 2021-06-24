@@ -26,14 +26,8 @@ endif
 
 LIBFT = -L./libft -lft
 
-libft_clean:
-	@cd libft && make clean
-libft_all:
-	@cd libft && make all
 
 ifeq ($(OS), Darwin)
-clean: libft_clean
-	@cd mlx_osx && make clean
 mlx_all:
 	@cd mlx_osx && make
 	@echo "mlx ready"
@@ -41,7 +35,6 @@ mlx_clean:
 	@cd mlx_osx && make clean
 	@echo "mlx clean"
 else
-clean: libft_clean	
 mlx_all:
 	@echo "mlx ready"
 mlx_clean:
@@ -50,13 +43,21 @@ endif
 
 all:
 	@cd libft && make re
-	make mlx_all
-	$(CC) $(LIBFT) $(FILE) $(MLX) -D OS=$(OS) $(KEY) -o $(NAME) -D STEP=1
+	@make mlx_all
+	$(CC) $(FILE) $(MLX) $(LIBFT) -D OS=$(OS) $(KEY) -o $(NAME) -g -D STEP=1 -D DIE_DELAY=1
 
-fclean: clean libft_clean mlx_clean
-	rm -rf $(NAME)
+clean:
+	@make mlx_clean
+	@cd libft && make clean
 
-re: fclean libft_all mlx_all all
+fclean: clean
+	@cd libft && make fclean
+	@rm -rf $(NAME)
+
+re: fclean
+	@cd libft && make re
+	@make all
+
 
 bonus: re
 

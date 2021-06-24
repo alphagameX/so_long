@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 13:46:46 by arthur            #+#    #+#             */
-/*   Updated: 2021/06/24 13:46:47 by arthur           ###   ########.fr       */
+/*   Updated: 2021/06/24 17:54:54 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ int	rendering(t_game *game)
 	draw_hud(game);
 	game->map.player.inertie_time = game->time / game->map.player.delay;
 	game->map.player.step_time = game->time / STEP_TIME;
-	game->map.player.die_time = game->time / 2;
+	game->map.player.die_time = game->time / DIE_DELAY;
 	return (1);
 }

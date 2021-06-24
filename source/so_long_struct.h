@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 15:05:49 by arthur            #+#    #+#             */
-/*   Updated: 2021/06/24 17:36:00 by arthur           ###   ########.fr       */
+/*   Updated: 2021/06/24 17:56:01 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define WIDTH 800
 # define CHUNCK_SIZE 25
 # define STEP_TIME 100
+# define FRAME_TO_DIE 120
 # if OS == 1
 #  include "../mlx_linux/mlx.h"
 #  define UP 65362

@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 11:37:19 by arthur            #+#    #+#             */
-/*   Updated: 2021/06/24 17:26:08 by arthur           ###   ########.fr       */
+/*   Updated: 2021/06/24 18:39:00 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	file_exists(t_game *game, char *path)
 	if (fd == -1)
 	{
 		ft_putstr("Error\n");
-		ft_putstr("Invalid map path\n");
+		ft_putstr("Invalid map path, check level folder\n");
+		ft_putstr("(in level folder, level_{number}.der)\n");
 		free(path);
 		exit_game(game);
 	}

@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 11:15:15 by arthur            #+#    #+#             */
-/*   Updated: 2021/06/24 11:29:13 by arthur           ###   ########.fr       */
+/*   Updated: 2021/06/24 18:42:38 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	is_valid_map(t_game *game, t_sarray *array, t_checking_map i)
 		x = 0;
 		while (x < ft_strlen(array->buffer[y]))
 		{
-			if (array->buffer[y][x] != '1')
+			if (array->buffer[y][x] != '1' && y < array->count - 1)
 			{
 				ft_putstr("Error\n");
-				ft_printf("Map have unknown character at %d:%d\n", y, x);
+				ft_printf("Map have invalid character at %d:%d\n", y, x);
 				exit_game(game);
 			}
 			x++;
@@ -64,7 +64,7 @@ void	arround_zero(t_game *game, t_sarray *array, t_checking_map i)
 			[i.y]) - 1 || i.y == array->count - 1)
 	{
 		ft_putstr("Error\n");
-		ft_printf("Map have 0 on border at %d:%d\n", i.y, i.x);
+		ft_printf("Map have problem on border at %d:%d\n", i.y, i.x);
 		exit_game(game);
 	}
 	if ((array->buffer[i.y + 1][i.x] == '1' || array->buffer
@@ -111,7 +111,7 @@ void 	checking_map(t_sarray *array, t_game *game)
 
 	i = init_checking_map();
 	if (array->count < 25)
-		exit_game(game);
+		invalid_map_size(game);
 	while (i.y < array->count)
 	{
 		i.x = 0;

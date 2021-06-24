@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 13:33:49 by arthur            #+#    #+#             */
-/*   Updated: 2021/06/24 16:13:41 by arthur           ###   ########.fr       */
+/*   Updated: 2021/06/24 18:37:45 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,10 @@ int	exit_game(t_game *game)
 {
 	free_textures_map(game);
 	free_textures_player(game);
-	if (game->input.count > 0)
+	if (game->input.count > 0 && game->input.list != NULL)
 		free(game->input.list);
-	free_sarray(&game->map.buffer);
+	if (game->map.buffer.count > 0 && game->map.buffer.buffer != NULL)
+		free_sarray(&game->map.buffer);
 	if (game->image.img)
 		mlx_destroy_image(game->mlx, game->image.img);
 	if (game->window)

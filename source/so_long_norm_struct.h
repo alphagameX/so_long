@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 15:05:52 by arthur            #+#    #+#             */
-/*   Updated: 2021/06/24 17:24:20 by arthur           ###   ########.fr       */
+/*   Updated: 2021/06/24 18:43:48 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ typedef struct s_draw_block
 t_checking_map	init_checking_map(void);
 t_hit			init_hit(t_game *game, t_player player);
 int				_h(char c);
+void			invalid_map_size(t_game *game);
 
 #endif

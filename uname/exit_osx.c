@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 13:33:49 by arthur            #+#    #+#             */
-/*   Updated: 2021/06/24 16:13:35 by arthur           ###   ########.fr       */
+/*   Updated: 2021/06/24 18:37:38 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	free_textures_map(t_game *game)
 	int	i;
 
 	i = 0;
-	if (game->textures)
+	if (game->textures != NULL)
 	{
 		while (game->textures[i].path != NULL)
 		{
@@ -44,7 +44,7 @@ void	free_textures_player(t_game *game)
 	int	i;
 
 	i = 0;
-	if (game->map.player.textures)
+	if (game->map.player.textures != NULL)
 	{
 		while (game->map.player.textures[i].path != NULL)
 		{
@@ -60,14 +60,15 @@ int 	exit_game(t_game *game)
 {
 	free_textures_map(game);
 	free_textures_player(game);
-	if (game->input.count > 0)
+	if (game->input.count > 0 && game->input.list != NULL)
 		free(game->input.list);
-	free_sarray(&game->map.buffer);
-	if (game->image.img)
+	if (game->map.buffer.count > 0 && game->map.buffer.buffer != NULL)
+		free_sarray(&game->map.buffer);
+	if (game->image.img != NULL)
 		mlx_destroy_image(game->mlx, game->image.img);
-	if (game->window)
+	if (game->window != NULL)
 		mlx_destroy_window(game->mlx, game->window);
-	if (game->mlx)
+	if (game->mlx != NULL)
 		free(game->mlx);
 	exit(0);
 	return (0);
