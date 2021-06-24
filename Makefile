@@ -44,7 +44,7 @@ endif
 all:
 	@cd libft && make re
 	@make mlx_all
-	$(CC) $(FILE) $(MLX) $(LIBFT) -D OS=$(OS) $(KEY) -o $(NAME) -g -D STEP=1 -D DIE_DELAY=1
+	$(CC) $(FILE) $(MLX) $(LIBFT) -D OS=$(OS) $(KEY) -o $(NAME) -D STEP=4 -D DIE_DELAY=1
 
 clean:
 	@make mlx_clean

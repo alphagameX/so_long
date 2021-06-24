@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_linux.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arthurtinseau <arthurtinseau@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 13:33:49 by arthur            #+#    #+#             */
-/*   Updated: 2021/06/24 18:37:45 by arthur           ###   ########.fr       */
+/*   Updated: 2021/06/24 18:54:05 by arthurtinse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,16 @@
 
 void	reset_game(t_game *game)
 {
+	t_player player;
+
 	free_sarray(&game->map.buffer);
 	game->map.buffer = parse_map(game);
 	checking_map(&game->map.buffer, game);
 	interpret_map(&game->map.buffer, game);
-	set_player_conf(game, &game->map.player);
+	player = get_spawn(game->map.buffer);
+	game->map.player.spawn_x = player.spawn_x;
+	game->map.player.spawn_y = player.spawn_y;
+	set_player_conf(game, &player);
 	set_chunk_conf(&game->map.chunk);
 }
 
