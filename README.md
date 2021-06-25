@@ -1,0 +1,2 @@
+# so_long
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a6a5f69d806e4afbae9f91256bd41e3f)](https://app.codacy.com/gh/alphagameX/so_long?utm_source=github.com&utm_medium=referral&utm_content=alphagameX/so_long&utm_campaign=Badge_Grade_Settings)
